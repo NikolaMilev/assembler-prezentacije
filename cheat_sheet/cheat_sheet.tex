@@ -1,0 +1,59 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage{titlesec}
+\usepackage[margin=1.2cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage[ddmmyyyy]{datetime}
+\begin{document}
+
+\title{Asemblersko programiranje za x86\_64 arhitekturu}
+\author{Nikola Milev}
+\date{Poslednja izmena: \today}
+\maketitle
+
+\section[1]{Sintaksa}
+	Na kursu ćemo koristiti Intelovu neprefiksnu sintaksu. \\ 
+	Svaki red asemblera može biti:\\
+	\begin{itemize}
+		\item Prazan red: prazni redovi se ignorišu
+		\item Direktiva
+		\item Komentar: Pri nailasku na simbol $\#$, ostatak linije se ignoriše
+		\item Linije koje nisu ni prazne ni direktive smatraju se instrukcijama
+		\item Svaka linija može početi labelom
+	\end{itemize}
+	\subsection{Labele}
+Definicija labele sastoji se iz identifikatora iza kog se navodi simbol $:$. Identifikator mora početi slovom ili simbolom $\_$, dok može sadržati slova, simbol $\_$ i cifre. Labele se prilikom prevođenja programa prevode u memorijske adrese. Labele mogu označavati adrese podataka, kao i instrukcija.
+	\subsection{Direktive}
+	Direktive počinju simbolom $.$ i imaju specijalno značenje. 
+	\begin{itemize}
+		\item $.intel\_syntax$ $noprefix$ -- Označava se da se koristi Intelova neprefiksna sintaksa
+		\item $.globl$ $identifikator$ ili $.global$ $identifikator$ -- Navodi se da je $identifikator$ globalni simbol
+		\item $.data$ -- Počinje se sekcija inicijalizovanih podataka
+		\item $.text$ -- Počinje se sekcija koda
+		\item $.asciz$ -- Kreira se ASCI niska na čijem se kraju automatski navodi terminirajuća nula
+		\item $.byte$ -- Kreira se jedan ili niz bajtova; članovi niza razdvojeni su zapetom
+		\item $.word$ -- Kreira se jedan ili niz slogova od 2 bajta
+		\item $.long$ -- Kreira se jedan ili niz slogova od 4 bajta
+		\item $.quad$ -- Kreira se jedan ili niz slogova od 8 bajtova
+	\end{itemize}
+	\subsection{Instrukcije}
+	Instrukcija se sastoji od koda operanda i operan(a)da. Svaki kod instrukcije ima svoju simboličku oznaku. Opšti oblik instrukcije sa dva operanda je: $kod$ $op1, op2$.
+Načini zadavanja operanada:	
+	\begin{itemize}
+		\item Registarski operandi: navodi se simbolička oznaka registra
+		\item Neposredni operandi: direktno se navodi vrednost sa kojom se radi
+		\item Memorijski operandi: navodi se adresa na kojoj se nalazi vrednost sa kojom se radi. Opšti sintaksni oblik je: $[B + S*I + D]$. $B$ je bazna adresa, $D$ je pomeraj, $I$ je indeks, dok je $I$ veličina "elementa". Svaki od navedenih elemenata može se izostaviti i tada se dobijaju specijalni slučajevi:
+		\begin{itemize}
+			\item $[B]$ -- Bazno adresiranje
+			\item $[B + D]$ -- Bazno adresiranje sa pomerajem
+			\item $[B + S*I]$ -- Indeksno adresiranje
+		\end{itemize}
+	\end{itemize}
+\section{Registri} 
+\section{Instrukcije}
+\section{Konvencije za pozivanje funkcija}
+\section{Konvencije za pisanje funkcija} Mozda ova dva u jedan
+\section{Prevođenje}
+
+\end{document}
