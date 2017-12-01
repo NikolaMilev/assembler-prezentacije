@@ -72,12 +72,77 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 		\end{itemize}
 	\subsection{Aritmetičke instrukcije}
 		% Pogledaj ovaj link kako bi razjasnio sve: https://en.wikibooks.org/wiki/X86_Assembly/Data_Transfer
+		\begin{itemize}
+			\item Sabiranje: $add$ $op1,$ $op2$ -- sabira argumente i rezultat smešta u prvi argument
+			\item Oduzimanje: $sub$ $op1,$ $op2$ -- oduzima argumente i rezultat smešta u prvi argument
+			\item Neoznačeno množenje: $mul$ $op$ -- množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$
+			\item Označeno množenje: $imul$ $op$ -- množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$
+			\item Proširivanje znaka: cdqe -- proširivanje registra $eax$ na $rax$
+			\item Proširivanje znaka: cdq -- proširivanje registra $rax$ na $rdx:rax$
+			\item Neoznačeno deljenje: $div$ $op$ -- neoznačeno deli sadršaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$
+			\item Označeno deljenje: $idiv$ $op$ -- neoznačeno deli sadršaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$
+			\item Negiranje: $neg$ $op$
+			\item Uvećanje operanda za 1: $inc$ $op$
+			\item Umanjenje operanda za 1: $dec$ $op$
+		\end{itemize}
 	\subsection{Logičke instrukcije}
+	\begin{itemize}
+		\item Konjunkcija: $and$ $op1$, $op2$
+		\item Disjunkcija: $or$ $op1$, $op2$
+		\item Ekskluzivna disjunkcija: $xor$ $op1$, $op2$
+		\item Negacija: $not$ $op$
+		\item Šiftovanje (pomeranje) u levo: $shl$ $op1$, $op2$ -- pomera prvi argument za broj mesta koji je sadržan u drugom argumentu
+		\item Šiftovanje (pomeranje) u desno:
+			\begin{itemize}
+				\item Logičko: $shr$ $op1$, $op2$
+				\item Aritmetičko: $sar$ $op1$, $op2$
+			\end{itemize}
+		
+	\end{itemize}
 	\subsection{Instrukcije poređenja}
+	\begin{itemize}
+		\item $cmp$ -- poređenje operanada oduzimanjem; ne menja operande nego $rflags$ registar
+		\item $test$ -- bitovsko poređenje operanada konjukcijom; ne menja operande nego $rflags$ registar
+	\end{itemize}
 	\subsection{Instrukcije kontrole toka}
+	\begin{itemize}
+		\item Bezuslovni skok: $jmp$ $op$ -- bezuslovni skok na adresu
+		\item Poziv funkcije: $call$ $op$ -- bezuslovni skok uz pamćenje povratne adrese na steku
+		\item $ret$ -- skidanje adrese sa steka i skok na nju
+		\item $jz$ $op$ -- Skok na adresu ukoliko je rezultat prethodne instrukcije nula
+		\item $je$ $op$ -- Skok na adresu ukoliko je rezultat prethodnog poređenja jednako (ekvivalentno sa $jz$)
+		\item $jnz$ $op$ -- Skok na adresu ukoliko rezultat prethodnog poređenja nije nula
+		\item $jne$ $op$ -- Skok na adresu ukoliko rezultat prethodnog poređenja nije jednako (ekvivalentno sa $jnz$)
+		\item $ja$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja veće (neoznačeni brojevi)
+		\item $jb$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja manje (neoznačeni brojevi)
+		\item $jae$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja veće ili jednako (neoznačeni brojevi)
+		\item $jae$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja manje ili jednako (neoznačeni brojevi)
+		\item $jg$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja veće (označeni brojevi)
+		\item $jl$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja manje (označeni brojevi)
+		\item $jge$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja veće ili jednako (označeni brojevi)
+		\item $jle$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja manje ili jednako (označeni brojevi)
+		\item Postoje i negacije navedenih instrukcija: $jna$, $jnb$, $jnae$, $jnbe$, $jng$, $jnl$, $jnge$, $jnle$
+	\end{itemize}
 	
-\section{Konvencije za pozivanje funkcija}
-\section{Konvencije za pisanje funkcija} Mozda ova dva u jedan
+\section{Konvencije za pozivanje i pisanje funkcija}
+\begin{itemize}
+\item Poziv se vrši instrukcijom $call$ $op$
+	\item Prenos parametara: Celobrojni parametri prenose se redom (s leva na desno) u registrima: $rdi$, $rsi$, $rdx$, $rcx$, $r8$, $r9$. Ukoliko funkciji prenosimo više od 6 argumenata, tada se preostali smeštaju na stek, redom s desna na levo.
+	\item Povratna vrednost nalazi se u $rax$ registru.
+	\item Registri koji pripadaju pozvanoj funkciji:
+		\begin{itemize}
+			\item $rax$, $rdi$, $rsi$, $rdx$, $rcx$, $r8-r10$
+		\end{itemize}
+	\item Registri koji pripadaju pozivajućoj funkciji:
+		\begin{itemize}
+			\item $rbx$, $rbp$, $r12-r15$
+		\end{itemize}
+	\item Ukoliko u našem programu pozivamo neku funkciju, neophodno je da u trenutku poziva adresa vrha steka (sadržana u registru $rsp$) bude deljiva sa 16.
+	\item Pisanje prologa: instrukcija $enter$ $n$, $0$ gde je $n$ broj bajtova koji odvajamo za lokalne promenljiva
+	\item Pisanje epiloga: instrukcija $leave$, koja vraća stek na stanje u trenutku ulaska u funkciju.
+	\item Povratak iz funkcije: instrukcija $ret$
+\end{itemize}
+	
 % vidi ovo dj kako da prevedes lepo
 \section{Prevođenje}
 
