@@ -1,5 +1,3 @@
-# ovaj fajl prevesti naredbom gcc 1.s
-
 # komentari pocinju simbolom # i vaze do kraja reda
 
 # koristimo intelovu neprefiksnu sintaksu
@@ -23,25 +21,25 @@ saberi:
 	# mov rbp, rsp
 	# sub rsp, n
 	#
-	# pamtimo pokazivac na okvir steka prethodne funkcije
-	# kao trenutni pokazivac na okvir steka postavljamo pokazivac
+	# Pamtimo pokazivac na okvir steka prethodne funkcije.
+	# Kao trenutni pokazivac na okvir steka postavljamo pokazivac
 	# na trenutni vrh steka i umanjujemo pokazivac na vrh steka za n, 
-	# sto znaci da odvajamo n bajtova za lokalne promenljive 
+	# sto znaci da odvajamo n bajtova za lokalne promenljive.
 	enter 0,0
 
 	#premestamo sadrziaj registra edi u registar eax
 	#edi i eax su donjih 4 bajta registara rdi i rax, redom
 	mov eax, edi
-	# sabiramo sadrzaje registara eax i esi, upisujuci rezultat 
-	# u registar eax
-	# kada koristimo Intelovu sintaksu, prvi operand je onaj
+	# Sabiramo sadrzaje registara eax i esi, upisujuci rezultat 
+	# u registar eax.
+	# Kada koristimo Intelovu sintaksu, prvi operand je onaj
 	# u koji upisujemo rezultat (ukoliko sama instrukcija funkcionise
-	# tako sto rezultat upisuje u jedan od operanada!)
-	# opsti oblik instrukcije koja ima dva operanda zbog ovoga je
+	# tako sto rezultat upisuje u jedan od operanada).
+	# Opsti oblik instrukcije koja ima dva operanda zbog ovoga je
 	# kod dst, src
 	# kod oznacava kod instrukcije, dat simbolicki
 	# dst - skracenica od destination
-	# src - skraceno od source 
+	# src - skraceno od source; nije nuzno izvor podataka
 	add eax, esi
 	# prolog
 	# ekvivalentno:
@@ -49,8 +47,8 @@ saberi:
 	# mov rsp, rbp
 	# pop rbp
 	#
-	# znacenje ovog dela jeste dealociranje lokalnih promenljivih i vracanje
-	# steka u stanje kao sto je bilo pre poziva funkcije
+	# Znacenje ovog dela jeste dealociranje lokalnih promenljivih i vracanje
+	# steka u stanje kao sto je bilo na pocetku funkcije (pre enter 0, 0 instrukcije)
 	leave
 	# kontrolu prepustamo pozivajucoj funkciji
 	ret
