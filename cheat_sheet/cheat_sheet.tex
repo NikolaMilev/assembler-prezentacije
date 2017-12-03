@@ -42,7 +42,7 @@ Načini zadavanja operanada:
 	\begin{itemize}
 		\item Registarski operandi: navodi se simbolička oznaka registra
 		\item Neposredni operandi: direktno se navodi vrednost sa kojom se radi
-		\item Memorijski operandi: navodi se adresa na kojoj se nalazi vrednost sa kojom se radi. Opšti sintaksni oblik je: $[B + S*I + D]$. $B$ je bazna adresa, $D$ je pomeraj, $I$ je indeks, dok je $I$ veličina "elementa". Svaki od navedenih elemenata može se izostaviti i tada se dobijaju specijalni slučajevi:
+		\item Memorijski operandi: navodi se adresa sa kojom se radi. Opšti sintaksni oblik je: $[B + S*I + D]$. $B$ je bazna adresa, $D$ je pomeraj, $I$ je indeks, dok je $I$ veličina "elementa". Svaki od navedenih elemenata može se izostaviti i tada se dobijaju specijalni slučajevi:
 		\begin{itemize}
 			\item $[B]$ -- Bazno adresiranje
 			\item $[B + D]$ -- Bazno adresiranje sa pomerajem
@@ -58,11 +58,11 @@ Moguć je pristup niža 4 bajta:
 	\begin{itemize}
 		\item $eax$, $ebx$, $ecx$, $edx$, $esi$, $edi$, $esp$, $ebp$, $r8d$, ..., $r15d$
 	\end{itemize}
-	Moguć je pristup i niža 2 bajta:
+	Moguć je pristup najniža 2 bajta:
 	\begin{itemize}
 		\item $ax$, $bx$, $cx$, $dx$, $si$, $di$, $sp$, $bp$, $r8w$, ..., $r15w$
 	\end{itemize}
-	U niža 2 bajta, moguć je pristup nižem bajtu: 
+	Moguć je pristup najnižem bajtu:
 	\begin{itemize}
 		\item $al$, $bl$, $cl$, $dl$, $sil$, $dil$, $spl$, $bpl$, $r8b$, ..., $r15b$
 	\end{itemize}
@@ -75,7 +75,8 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 	\subsection{Instrukcije za rad sa stekom}
 		\begin{itemize}
 			\item $push$ $op$ -- Na vrh steka smešta se vrednost sadržana u operandu. Registar $rsp$ umanjuje se za veličinu operanda. Na stek je moguće smestiti samo dvobajtne i osmobajtne podatke.
-		\end{itemize} $pop$ $op$ -- Sa vrha steka uklanja se vrednost i smešta se u operand. registar $rsp$ uvećava se za veličinu operanda. Sa steka je moguće ukloniti samo dvobajtne i osmobajtne podatke. 
+		 \item $pop$ $op$ -- Sa vrha steka uklanja se vrednost i smešta se u operand. registar $rsp$ uvećava se za veličinu operanda. Sa steka je moguće ukloniti samo dvobajtne i osmobajtne podatke. 
+		 \end{itemize}
 	\subsection{Instrukcije transfera}
 		\begin{itemize}
 			\item $mov$ $op1,$ $op2$ -- U prvi operand smešta se vrednost drugog operanda.
@@ -136,7 +137,14 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 		\item $jle$ $op$ -- Skok ukoliko je rezultat prethodnog poređenja manje ili jednako (označeni brojevi)
 		\item Postoje i negacije navedenih instrukcija: $jna$, $jnb$, $jnae$, $jnbe$, $jng$, $jnl$, $jnge$, $jnle$
 	\end{itemize}
-	
+\subsection{Širina operanada u instrukciji}
+Ukoliko kao jedan od operanada navedemo registar, njegova širina implicitno određuje širinu drugog operanda. Međutim, ukoliko nijedan operand nije registarski, neophodno je eksplicitno naglasiti veličinu bar jednog operanada:
+	\begin{itemize}
+		\item $byte$ $ptr$ -- Tretira operand kao jednobajtni podatak.
+		\item $word$ $ptr$ -- Tretira operand kao dvobajtni podatak.
+		\item $dword$ $ptr$ -- Tretira operand kao četvorobajtni podatak.
+		\item $qword$ $ptr$ -- Tretira operand kao osmobajtni podatak.
+	\end{itemize}
 \section{Konvencije za pozivanje i pisanje funkcija}
 \begin{itemize}
 \item Poziv se vrši instrukcijom $call$ $op$
@@ -144,11 +152,11 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 	\item Povratna vrednost nalazi se u $rax$ registru.
 	\item Registri koji pripadaju pozvanoj funkciji:
 		\begin{itemize}
-			\item $rax$, $rdi$, $rsi$, $rdx$, $rcx$, $r8-r10$
+			\item $rax$, $rdi$, $rsi$, $rdx$, $rcx$, $r8-r11$
 		\end{itemize}
 	\item Registri koji pripadaju pozivajućoj funkciji:
 		\begin{itemize}
-			\item $rbx$, $rbp$, $r12-r15$
+			\item $rbx$, $rbp$, $rsp$, $r12-r15$
 		\end{itemize}
 	\item Ukoliko u našem programu pozivamo neku funkciju, neophodno je da u trenutku poziva adresa vrha steka (sadržana u registru $rsp$) bude deljiva sa 16.
 	\item Pisanje prologa: instrukcija $enter$ $n$, $0$ gde je $n$ broj bajtova koji odvajamo za lokalne promenljiva
