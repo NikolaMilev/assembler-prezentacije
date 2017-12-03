@@ -70,9 +70,19 @@ saberi:
 main:
 	# epilog
 	enter 8, 0
-	# rcx pamtimo jer cemo imati pozive funkcija
+	# pri call instrukciji, na stek se stavlja osmobajtna povratna adresa
+	# pri enter n, 0 instrukciji, na stek se stavlja stari okvir steka (8 bajtova)
+	# i jos n za lokalne promenljive
+	# dakle, ukoliko je vrh steka bio deljiv sa 16 pre call instrukcije,
+	# nakon nje (tj. posle enter n, 0 instrukcije u pozvanoj funkciji) imamo jos 16 + n bajtova na steku
+	# zbog ovoga je neophodno da ili n bude deljivo sa 16 ili da dodamo koliko bajtova je neophodno
+	# da bi adresa sadrzana u rsp bila deljiva sa 16
+	
+	# rcx stavljamo na stek jer cemo imati pozive funkcija
 	# a svi pozivi funkcija zahtevaju da adresa vrha steka
 	# bude deljiva sa 16
+	# umesto rcx smo mogli da napisemo
+	# sub rsp, 8
 	push rcx
 	# pripremamo registre za poziv funkcije scanf
 	# ucitavamo adresu koju oznacava labela form1
@@ -119,7 +129,15 @@ main:
 	# pozivamo funkciju printf
 	call printf
 
+	# stavljamo 0 u registar koji sluzi za prenosenje povratne vrednosti
+	# moguce i xor rax, rax jer xor necega sa samim sobom uvek daje 0
+	mov rax, 0
 	# cistimo za sobom
+	# iako imamo naredbu push rcx pri pocetku, kako nije neophodno da pamtimo
+	# vrednost rcx pri izlasku iz funkcije, ne moramo je vratiti
+	# deo steka koju koristimo u funkciji ce se ispravno isprazniti jer je leave
+	# kao da smo uradili mov rsp, rbp pa pop rbp
+	# i samim time je nebitno koliko smo stvari stavili na stek
 	leave
 	# zavrsavamo funkciju
 	ret
