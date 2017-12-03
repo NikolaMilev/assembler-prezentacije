@@ -14,16 +14,15 @@
 
 \section[1]{Sintaksa}
 	Na kursu ćemo koristiti Intelovu neprefiksnu sintaksu. \\ 
-	Svaki red asemblera može biti:\\
+	Svaki red asemblera može biti:
 	\begin{itemize}
 		\item Prazan red: prazni redovi se ignorišu
 		\item Direktiva
-		\item Komentar: Pri nailasku na simbol $\#$, ostatak linije se ignoriše
 		\item Linije koje nisu ni prazne ni direktive smatraju se instrukcijama
-		\item Svaka linija može početi labelom
 	\end{itemize}
+Pri nailasku na simbol $\#$, ostatak linije se ignoriše (komentari). Svaka linija može početi labelom.
 	\subsection{Labele}
-Definicija labele sastoji se iz identifikatora iza kog se navodi simbol $:$. Identifikator mora početi slovom ili simbolom $\_$, dok može sadržati slova, simbol $\_$ i cifre. Labele se prilikom prevođenja programa prevode u memorijske adrese. Labele mogu označavati adrese podataka, kao i instrukcija.
+Definicija labele sastoji se iz identifikatora iza kog se navodi simbol $:$. Identifikator mora početi slovom ili simbolom $\_$, dok može sadržati slova, simbol $\_$ i cifre. Labele se prilikom prevođenja programa prevode u memorijske adrese. Labele mogu označavati adrese podataka, kao i adrese instrukcija.
 	\subsection{Direktive}
 	Direktive počinju simbolom $.$ i imaju specijalno značenje. 
 	\begin{itemize}
@@ -51,10 +50,22 @@ Načini zadavanja operanada:
 		\end{itemize}
 	\end{itemize}
 \section{Registri} 
-U toku kursa, koristiće se uglavnom registri opšte namene. Njih ima 16: \\
-	$rax$, $rbx$, $rcx$, $rdx$, $rsi$, $rdi$, $rsp$, $rbp$, $r8$, ..., $r15$ 
-Navedeni registri imaju veličinu 8 bajtova (64 bita). Moguć je pristup niža 4 bajta: \\ 
-	$eax$, $ebx$, $ecx$, $edx$, $esi$, $edi$, $esp$, $ebp$, $r8d$, ..., $r15d$ \\
+U toku kursa, koristiće se registri opšte namene, veličine 8 bajtova (64 bita). Njih ima 16:
+	\begin{itemize}
+		\item $rax$, $rbx$, $rcx$, $rdx$, $rsi$, $rdi$, $rsp$, $rbp$, $r8$, ..., $r15$
+	\end{itemize}
+Moguć je pristup niža 4 bajta:
+	\begin{itemize}
+		\item $eax$, $ebx$, $ecx$, $edx$, $esi$, $edi$, $esp$, $ebp$, $r8d$, ..., $r15d$
+	\end{itemize}
+	Moguć je pristup i niža 2 bajta:
+	\begin{itemize}
+		\item $ax$, $bx$, $cx$, $dx$, $si$, $di$, $sp$, $bp$, $r8w$, ..., $r15w$
+	\end{itemize}
+	U niža 2 bajta, moguć je pristup nižem bajtu: 
+	\begin{itemize}
+		\item $al$, $bl$, $cl$, $dl$, $sil$, $dil$, $spl$, $bpl$, $r8b$, ..., $r15b$
+	\end{itemize}
 Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 	\begin{itemize}
 			\item Registar $rbp$ služi za čuvanje trenutnog okvira steka.
@@ -68,6 +79,8 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 	\subsection{Instrukcije transfera}
 		\begin{itemize}
 			\item $mov$ $op1,$ $op2$ -- U prvi operand smešta se vrednost drugog operanda.
+			\item $movzx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena nulama (transfer sa neoznačenim proširivanjem). Drugi operand ne može biti dat neposredno.
+			\item $movsx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena u skladu sa znakom (transfer sa označenim proširivanjem).  Drugi operand ne može biti dat neposredno.
 			\item $lea$ $op1,$ $op2$ -- U drugi operand smešta se adresa drugog operanda.
 		\end{itemize}
 	\subsection{Aritmetičke instrukcije}
@@ -91,11 +104,11 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 		\item Disjunkcija: $or$ $op1$, $op2$
 		\item Ekskluzivna disjunkcija: $xor$ $op1$, $op2$
 		\item Negacija: $not$ $op$
-		\item Šiftovanje (pomeranje) u levo: $shl$ $op1$, $op2$ -- pomera prvi argument za broj mesta koji je sadržan u drugom argumentu
+		\item Šiftovanje (pomeranje) u levo: $shl$ $op1$, $op2$ -- pomera prvi argument za broj mesta koji je sadržan u drugom argumentu. Drugi argument mora biti dat neposredno.
 		\item Šiftovanje (pomeranje) u desno:
 			\begin{itemize}
-				\item Logičko: $shr$ $op1$, $op2$
-				\item Aritmetičko: $sar$ $op1$, $op2$
+				\item Logičko: $shr$ $op1$, $op2$ ; Drugi argument mora biti dat neposredno.
+				\item Aritmetičko: $sar$ $op1$, $op2$ ; Drugi argument mora biti dat neposredno.
 			\end{itemize}
 		
 	\end{itemize}
@@ -145,5 +158,5 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 	
 % vidi ovo dj kako da prevedes lepo
 \section{Prevođenje}
-
+Za prevođenje asemblerskog koda dovoljno je koristiti $gcc$. Na primer, ukoliko prevodimo dva fajla, $1.c$ i $1.s$, tada bi naredba za prevođenje bila $gcc$ $1.c$ $1.s$.
 \end{document}
