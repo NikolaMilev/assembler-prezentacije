@@ -1,6 +1,9 @@
 #include <stdio.h>
 
-int maksimum(int a, int b) ;
+// nasa funkcija
+// kako C dozvoljava da se pri deklaraciji izostave imena argumenata,
+// nije neophodno da ih pisemo
+int maksimum(int, int) ;
 
 int main()
 {

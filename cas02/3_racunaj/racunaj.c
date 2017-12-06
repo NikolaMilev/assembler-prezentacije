@@ -1,12 +1,15 @@
 #include <stdio.h>
 
-int racunaj(int a, int b, char op) ;
+// funkcija koja u zavisnosti od treceg argumenta vrsi
+// sabiranje, oduzimanje, mnozenje, deljenje ili trazi ostatak 
+// pri deljenju prva dva argumenta
+long racunaj(long, long, char) ;
 
 int main()
 {
-	int a, b;
+	long a, b;
 	char op;
-	scanf("%d %c %d", &a, &op, &b);
-	printf("Rezultat: %d\n", racunaj(a, b, op));
+	scanf("%ld %c %ld", &a, &op, &b);
+	printf("Rezultat: %ld\n", racunaj(a, b, op));
 	return 0;
 }
