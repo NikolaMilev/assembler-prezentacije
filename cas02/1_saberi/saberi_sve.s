@@ -39,7 +39,7 @@ main:
 	call scanf
 
 	# kada je drugi operand mov instrukcije adresa, radi se sa vrednoscu koja se nalazi na toj
-	# adresi, nalik na dereferenciranje
+	# adresi (nalik na dereferenciranje)
 	mov edi, [rbp-4]
 	mov esi, [rbp-8]
 	call saberi
@@ -50,6 +50,7 @@ main:
 	call printf
 
 	# stavljamo 0 u eax registar
+	# (return 0 na kraju main funkcije)
 	xor eax, eax
 	leave
 	ret

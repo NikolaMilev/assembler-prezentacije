@@ -3,13 +3,13 @@
 // funkcija koja u zavisnosti od treceg argumenta vrsi
 // sabiranje, oduzimanje, mnozenje, deljenje ili trazi ostatak 
 // pri deljenju prva dva argumenta
-long racunaj(long, long, char) ;
+int racunaj(int, int, char) ;
 
 int main()
 {
-	long a, b;
+	int a, b;
 	char op;
-	scanf("%ld %c %ld", &a, &op, &b);
-	printf("Rezultat: %ld\n", racunaj(a, b, op));
+	scanf("%d %c %d", &a, &op, &b);
+	printf("Rezultat: %d\n", racunaj(a, b, op));
 	return 0;
 }

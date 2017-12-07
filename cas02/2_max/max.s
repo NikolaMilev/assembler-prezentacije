@@ -15,6 +15,7 @@ maksimum:
 	# jng instrukcija vrsi skok na adresu koja je data kao operand
 	# ukoliko rezultat prethodnog poredjenja nije vece 
 	jng drugi
+	# ukoliko uslov skoka nije tacan, nastavljamo sa izvrsavanjem od sledece instrukcije
 
 	# ukoliko rezultat prethodnog poredjenja jeste vece, tada znamo da 
 	# je prvi maksimum i stavljamo ga u registar koji cuva povratnu vrednost

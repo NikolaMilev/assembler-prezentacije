@@ -89,12 +89,13 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 		\begin{itemize}
 			\item Sabiranje: $add$ $op1,$ $op2$ -- sabira argumente i rezultat smešta u prvi argument
 			\item Oduzimanje: $sub$ $op1,$ $op2$ -- oduzima argumente i rezultat smešta u prvi argument
-			\item Neoznačeno množenje: $mul$ $op$ -- množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$
-			\item Označeno množenje: $imul$ $op$ -- množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$
-			\item Proširivanje znaka: cdqe -- proširivanje registra $eax$ na $rax$
-			\item Proširivanje znaka: cdq -- proširivanje registra $rax$ na $rdx:rax$
-			\item Neoznačeno deljenje: $div$ $op$ -- neoznačeno deli sadršaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$
-			\item Označeno deljenje: $idiv$ $op$ -- neoznačeno deli sadršaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$
+			\item Neoznačeno množenje: $mul$ $op$ -- Ukoliko je operand osmobajtni, neoznačeno množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$. Ukoliko je operand četvorobajtni, neoznačeno množi sadržaj registra $eax$ operandom $op$ i rezultat se smešta u $edx:eax$.
+			\item Označeno množenje: $imul$ $op$ -- Ukoliko je operand osmobajtni, označeno množi sadržaj registra $rax$ operandom $op$ i rezultat se smešta u $rdx:rax$. Ukoliko je operand četvorobajtni, označeno množi sadržaj registra $eax$ operandom $op$ i rezultat se smešta u $edx:eax$.
+			\item Proširivanje znaka: cdqe -- označeno proširivanje registra $eax$ na $rax$
+			\item Proširivanje znaka: cdq -- označeno proširivanje registra $eax$ na $edx:eax$
+			\item Proširivanje znaka: cqo -- označeno proširivanje registra $rax$ na $rdx:rax$
+			\item Neoznačeno deljenje: $div$ $op$ --ukoliko je operand osmobajtni, neoznačeno deli sadržaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$ . Ukoliko je operand četvorobajtni, neoznačeno deli sadržaj registara $edx:eax$ operandom $op$; količnik se nalazi u $eax$ dok se ostatak pri deljenju nalazi u $edx$.
+			\item Označeno deljenje: $idiv$ $op$ --ukoliko je operand osmobajtni, označeno deli sadržaj registara $rdx:rax$ operandom $op$; količnik se nalazi u $rax$ dok se ostatak pri deljenju nalazi u $rdx$ . Ukoliko je operand četvorobajtni, označeno deli sadržaj registara $edx:eax$ operandom $op$; količnik se nalazi u $eax$ dok se ostatak pri deljenju nalazi u $edx$.
 			\item Negiranje: $neg$ $op$
 			\item Uvećanje operanda za 1: $inc$ $op$
 			\item Umanjenje operanda za 1: $dec$ $op$
