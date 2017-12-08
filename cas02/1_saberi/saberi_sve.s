@@ -24,15 +24,19 @@ main:
 	sub rsp, 8
 # mozemo i:
 	# xor rsp, 0xfffffffffffffff0
+	# tj. 
+	# xor rsp, -16
 	# ova instrukcija ce smanjiti vrednost rsp za najvise 15 bajtova i poravnace ga sa 16
 	# na ovaj nacin ne moramo da razmisljamo koliko smo bajtova pre ovoga stavili na stek
+	# ovo ima i losu stranu: ukoliko smo stavljali podatke na stek, nismo sigurni da ce
+	# skidanje podataka biti ispravno
 
 	# lea rdi, form1 ucitava 8-bajtnu adresu koju predstavlja labela form1
 	# kada bismo napisali mov rdi, form1, tada bi se sa adrese koju predstavlja labela form1
 	# ucitalo 8 bajtova (toliki je prvi operand) a to ne zelimo!
 	lea rdi, form1
-	# kada je drugi operand lea instrukcije adresa, ne cita se vrednost sa nje
-	# vec se direktno radi sa adresom
+	# drugi operand lea instrukcije posmatra se kao adresa i ne cita se vrednost sa nje
+	# vec se direktno radi sa tom adresom
 	lea rsi, [rbp-4]
 	lea rdx, [rbp-8]
 	mov rax, 0

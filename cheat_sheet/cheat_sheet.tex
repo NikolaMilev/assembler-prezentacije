@@ -37,7 +37,7 @@ Definicija labele sastoji se iz identifikatora iza kog se navodi simbol $:$. Ide
 		\item $.quad$ -- Kreira se jedan ili niz slogova od 8 bajtova
 	\end{itemize}
 	\subsection{Instrukcije}
-	Instrukcija se sastoji od koda operanda i operan(a)da. Svaki kod instrukcije ima svoju simboličku oznaku. Opšti oblik instrukcije sa dva operanda je: $kod$ $op1, op2$.
+	Instrukcija se sastoji od koda instrukcije i operan(a)da. Svaki kod instrukcije ima svoju simboličku oznaku. Opšti oblik instrukcije sa dva operanda je: $kod$ $op1, op2$.
 Načini zadavanja operanada:	
 	\begin{itemize}
 		\item Registarski operandi: navodi se simbolička oznaka registra
@@ -82,7 +82,7 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 			\item $mov$ $op1,$ $op2$ -- U prvi operand smešta se vrednost drugog operanda. Očekuje se da oba operanda budu iste širine.
 			\item $movzx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena nulama (transfer sa neoznačenim proširivanjem). Drugi operand ne može biti dat neposredno. Očekivano je da je drugi operand manje širine od prvog.
 			\item $movsx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena u skladu sa znakom (transfer sa označenim proširivanjem).  Drugi operand ne može biti dat neposredno. Očekivano je da je drugi operand manje širine od prvog.
-			\item $lea$ $op1,$ $op2$ -- U drugi operand smešta se adresa drugog operanda.
+			\item $lea$ $op1,$ $op2$ -- U drugi operand smešta se adresa koja je predstavljena drugim operandom.
 		\end{itemize}
 	\subsection{Aritmetičke instrukcije}
 		% Pogledaj ovaj link kako bi razjasnio sve: https://en.wikibooks.org/wiki/X86_Assembly/Data_Transfer
@@ -160,8 +160,8 @@ Ukoliko kao jedan od operanada navedemo registar, njegova širina implicitno odr
 			\item $rbx$, $rbp$, $rsp$, $r12-r15$
 		\end{itemize}
 	\item Ukoliko u našem programu pozivamo neku funkciju, neophodno je da u trenutku poziva adresa vrha steka (sadržana u registru $rsp$) bude deljiva sa 16.
-	\item Pisanje prologa: instrukcija $enter$ $n$, $0$ gde je $n$ broj bajtova koji odvajamo za lokalne promenljiva
-	\item Pisanje epiloga: instrukcija $leave$, koja vraća stek na stanje u trenutku ulaska u funkciju.
+	\item Pisanje prologa: instrukcija $enter$ $n$, $0$ gde je $n$ broj bajtova koji odvajamo za lokalne promenljive
+	\item Pisanje epiloga: instrukcija $leave$, koja vraća stek u stanje u trenutku ulaska u funkciju.
 	\item Povratak iz funkcije: instrukcija $ret$
 \end{itemize}
 	
