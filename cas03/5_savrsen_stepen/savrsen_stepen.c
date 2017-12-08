@@ -1,7 +1,7 @@
 #include <stdio.h>
 // funckija ispituje da li je n = m^k za neke prirodne brojeve m i k  (k > 1). Ako jeste,
 // vraca 1, a preko pokazivaca vraca m i k.
-int savrsen_stepen(unsigned, unsigned*, unsigned *);
+int savrsen_stepen(unsigned n, unsigned* m, unsigned *k);
 
 int main()
 {
@@ -14,6 +14,6 @@ int main()
 	}
 	else
 	{
-		printf("Broj %u nije savrsen stepen!\n");
+		printf("Broj %u nije savrsen stepen!\n", n);
 	}
 }
