@@ -27,6 +27,10 @@ kraj_nzd:
 
 # unsigned ojler(unsigned) ;
 #      eax            edi
+# Ojlerova funkcija broja n oznacava broj brojeva
+# strogo manjih od n koji su uzajamno prosti sa n
+# koristicemo cinjenicu da su brojevi uzajamno prosti
+# akko im je nzd 1
 # ideja
 # ojler_brojac = 0
 # ojler_trenutni = 1

@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+// Ojlerova funkcija broja n oznacava broj brojeva
+// strogo manjih od n koji su uzajamno prosti sa n
 unsigned ojler(unsigned) ;
 
 int main()

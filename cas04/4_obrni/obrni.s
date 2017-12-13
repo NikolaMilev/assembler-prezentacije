@@ -19,13 +19,17 @@ petlja:
 	cmp rdi, rcx
 	ja kraj
 
+	# zamenjujemo mesto desnog i levog elementa
 	mov r8d, [rdi]
 	mov r9d, [rcx]
 	mov [rdi], r9d
 	mov [rcx], r8d
 
+	# pomeramo levi za 1 mesto u desno
 	add rdi, 4
+	# pomeramo desni za 1 mesto u levo
 	sub rcx, 4
+	# skacemo na pocetak petlje
 	jmp petlja
 
 kraj:
