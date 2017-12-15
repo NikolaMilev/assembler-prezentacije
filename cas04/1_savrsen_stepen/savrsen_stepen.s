@@ -28,7 +28,7 @@ savrsen_stepen:
 	enter 0,0
 	# upisujemo u *m 2
 	mov [rsi], dword ptr 2
-	# upisujemo u *k 1
+	# upisujemo u *k 2
 	mov [rdx], dword ptr 2
 	# racunamo n/2 i smestamo u ecx
 	mov ecx, edi
@@ -50,7 +50,7 @@ unutrasnja:
 	cmp r8d, edi
 	# ukoliko je stepen = n, tada smo nasli par m, k
 	je jeste
-	# ukoliko je stepen > n, povecavamo m, upisujemo u k 1 i idemo dalje
+	# ukoliko je stepen > n, povecavamo m, upisujemo u k 2 i idemo dalje
 	ja priprema_spoljasnja
 	# inace, mnozimo 
 	# kako je u rdx treci argument, cuvamo ga

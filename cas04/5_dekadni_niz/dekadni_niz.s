@@ -34,6 +34,7 @@ dekadni_niz:
 	# cuvamo kopiju jer ce nam za poziv funkcije obrni trebati adresa
 	# pocetnog elementa niza
 	mov r8, rsi
+	# cuvamo 10 na steku
 	mov [rbp-4], dword ptr 10
 dek_niz_petlja:
 	# spremamo se za deljenje
