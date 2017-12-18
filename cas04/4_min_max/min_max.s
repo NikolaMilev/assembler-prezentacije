@@ -39,11 +39,16 @@ petlja:
 	# inace, idemo na sledeci element niza
 	jmp sledeca_iteracija
 promeni_min:
+	# znamo da je u r9d trenutni element niza
+	# smestamo ga na adresu sadrzanu u rdx
 	mov [rdx], r9d
 	jmp sledeca_iteracija
 promeni_max:
+	# znamo da je u r9d trenutni element niza
+	# smestamo ga na adresu sadrzanu u rcx
 	mov [rcx], r9d
 sledeca_iteracija:
+	# pomeramo se na naredni element niza i skacemo na pocetak petlje
 	add rdi, 4
 	jmp petlja
 kraj:
