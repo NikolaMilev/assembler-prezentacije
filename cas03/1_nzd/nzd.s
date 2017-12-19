@@ -5,23 +5,12 @@
 
 # unsigned nzd(unsigned, unsigned) ;
 #      eax          edi       esi
-# iterativno racunamo nzd argumenata
-# posto je pretpostavka algoritma da a >= b,
-# prvo cemo se osigurati da je zaista tako
-
+# iterativno racunamo nzd argumenata Euklidovim algoritmom
 nzd:
 	enter 0,0
-	cmp edi, esi
-	jge nastavi
-	# vrsimo zamenu argumenata
-	mov ecx, edi
-	mov edi, esi
-	mov esi, ecx
-
-	# nastavljamo
-nastavi:
+petlja:
 	# ideja:
-	# ukoliko je b 0, nzd je a
+	# ukoliko je b = 0, nzd(a,0) = a
 	# ukoliko je b > 0, tada je nzd(a,b) = nzd(b, a%b)
 	# while(b > 0)
 	# {
@@ -49,7 +38,7 @@ nastavi:
 	# u drugi smestamo ostatak
 	mov esi, edx
 	# nastavljamo
-	jmp nastavi
+	jmp petlja
 kraj:
 	mov eax, edi
 	leave
