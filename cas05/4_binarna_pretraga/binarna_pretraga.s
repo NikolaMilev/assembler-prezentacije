@@ -7,6 +7,8 @@
 
 binarna_pretraga:
 	enter 0,0
+	# ukoliko je indeks pocetka veci od indeksa kraja, 
+	# zavrsavamo bez uspeha
 	cmp esi, edx
 	jg nije
 
@@ -48,6 +50,7 @@ jeste:
 	mov eax, r8d
 	jmp kraj
 nije:
+	# indeks -1 nije validan indeks niza pa ga stavljamo kao indikator neuspeha
 	mov eax, -1
 kraj:
 	leave
