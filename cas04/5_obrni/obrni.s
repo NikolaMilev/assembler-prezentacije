@@ -3,13 +3,13 @@
 .text
 .globl obrni
 
-# void obrni(int[], int) ;
-#              rdi  esi
+# void obrni(long[], int) ;
+#               rdi  esi
 
 obrni:
 	enter 0,0
 	# ucitavamo adresu poslednjeg elementa u rcx
-	lea rcx, [rdi + rsi*4 - 4]
+	lea rcx, [rdi + rsi*8 - 8]
 	# u rdi cuvamo adresu levog elementa za zamenu a u 
 	# rcx adresu desnog elementa za zamenu
 petlja:
@@ -20,15 +20,15 @@ petlja:
 	ja kraj
 
 	# zamenjujemo mesto desnog i levog elementa
-	mov r8d, [rdi]
-	mov r9d, [rcx]
-	mov [rdi], r9d
-	mov [rcx], r8d
+	mov r8, [rdi]
+	mov r9, [rcx]
+	mov [rdi], r9
+	mov [rcx], r8
 
 	# pomeramo levi za 1 mesto u desno
-	add rdi, 4
+	add rdi, 8
 	# pomeramo desni za 1 mesto u levo
-	sub rcx, 4
+	sub rcx, 8
 	# skacemo na pocetak petlje
 	jmp petlja
 
