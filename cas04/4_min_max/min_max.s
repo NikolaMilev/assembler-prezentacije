@@ -8,8 +8,6 @@
 
 min_max:
 	enter 0,0
-	cmp esi, 0
-	jle kraj
 	# cuvamo adresu kraja niza (poslednjeg elementa) u r8
 	# radimo direktno sa tom adresom i zbog toga koristimo lea instrukciju
 	# moramo koristiti rsi jer vec koristimo rdi kao baznu adresu
