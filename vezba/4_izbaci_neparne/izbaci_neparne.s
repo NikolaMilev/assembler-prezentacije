@@ -6,6 +6,9 @@
 
 # void izbaci_neparne(int a[], unsigned *len) ;
 #                         rdi            rsi
+
+# prilikom svakog izbacivanja, pomeramo sve elemente
+# koji su desno od onog koji izbacujemo za jedno mesto u levo
 izbaci_neparne:
 	enter 0,0
 	mov ecx, [rsi]
@@ -18,7 +21,7 @@ petlja:
 	test dword ptr [rdi], 1
 	# ako je broj paran, nastavljamo
 	jz nastavi_petlja
-	#inace, izbacijemo trenutni element
+	#inace, izbacujemo trenutni element
 	jmp izbaci
 nastavi_petlja:
 	add rdi, 4

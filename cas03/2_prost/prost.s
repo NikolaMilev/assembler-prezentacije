@@ -32,7 +32,7 @@ prost:
 
 petlja:
 	cmp ecx, r8d
-	jg jeste_prost
+	ja jeste_prost
 
 	# spremamo se za deljenje
 	xor edx, edx

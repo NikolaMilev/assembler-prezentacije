@@ -6,11 +6,6 @@
 # funkcija nzd sa ovog casa
 nzd:
 	enter 0,0
-	cmp edi, esi
-	jge petlja_nzd
-	mov ecx, edi
-	mov edi, esi
-	mov esi, ecx
 petlja_nzd:
 	test esi, esi
 	jz kraj_nzd
@@ -51,7 +46,7 @@ ojler:
 	mov r8d, 0
 petlja_ojler:
 	cmp edi, ecx
-	jng kraj_ojler
+	jna kraj_ojler
 	# kako r8 i rcx pripadaju pozvanoj funkciji, moracemo da ih cuvamo na steku pre poziva
 	# isto vazi za rdi, parametar prosledjen funkciji
 	push rdi

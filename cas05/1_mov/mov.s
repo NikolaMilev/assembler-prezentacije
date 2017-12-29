@@ -23,6 +23,10 @@ foo2:
 	# rdi bice postavljeni na 0
 	mov edi, edi
 	mov rax, rdi
+	# isti efekat imali bismo instrukcijom 
+	# jer kopiramo niza 4 bajta dok se u visa
+	# 4 bajta upisuje 0
+	# mov eax, edi
 	leave
 	ret
 

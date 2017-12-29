@@ -13,8 +13,15 @@ binarna_pretraga:
 	jg nije
 
 	# trazimo indeks sredisnjeg elementa
+	# mov r8d, esi ce prepisati sadrzaj registra
+	# niza 4 bajta registra rsi u niza 4 bajta registra r8
+	# dok ce u visa 4 bajta upisati 0
 	mov r8d, esi
 	add r8d, edx
+	# posto su indeksi oznacene promenljive, radimo aritmeticko siftovanje
+	# ovde ne bi smelo da nam znaci da li koristimo
+	# aritmeticko ili logicko siftovanje
+	# jer ovaj prosek ne bi smeo da bude negativan broj
 	sar r8d, 1
 
 	# poredimo element na sredisnjem indeksu sa vrednosti koju trazimo
@@ -31,7 +38,7 @@ levo:
 	mov edx, r8d
 	dec edx
 	jmp poziv
-# idemo u desnu polovinu niza: umesto desnog kraja pisemo sredisnji+1
+# idemo u desnu polovinu niza: umesto levog kraja pisemo sredisnji+1
 desno:
 	mov esi, r8d
 	inc esi
@@ -47,6 +54,8 @@ poziv:
 	# nakon poziva skacemo na kraj; u eax je rezultat rekurzivnog poziva
 	jmp kraj
 jeste:
+	# element koji trazimo je na indeksu sredisnjeg elementa koji smo izracunali
+	# i smestili u r8d
 	mov eax, r8d
 	jmp kraj
 nije:

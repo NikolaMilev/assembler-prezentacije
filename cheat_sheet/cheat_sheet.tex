@@ -82,7 +82,7 @@ Registri $rbp$ i $rsp$ imaju specijalnu svrhu pri radu sa stekom:
 			\item $mov$ $op1,$ $op2$ -- U prvi operand smešta se vrednost drugog operanda. Očekuje se da oba operanda budu iste širine.
 			\item $movzx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena nulama (transfer sa neoznačenim proširivanjem). Drugi operand ne može biti dat neposredno. Očekivano je da je drugi operand manje širine od prvog.
 			\item $movsx$ $op1$, $op2$ -- U prvi operand smešta se vrednost drugog operanda, proširena u skladu sa znakom (transfer sa označenim proširivanjem).  Drugi operand ne može biti dat neposredno. Očekivano je da je drugi operand manje širine od prvog.
-			\item $lea$ $op1,$ $op2$ -- U drugi operand smešta se adresa koja je predstavljena drugim operandom.
+			\item $lea$ $op1,$ $op2$ -- U prvi operand smešta se adresa koja je predstavljena drugim operandom.
 		\end{itemize}
 	\subsection{Aritmetičke instrukcije}
 		% Pogledaj ovaj link kako bi razjasnio sve: https://en.wikibooks.org/wiki/X86_Assembly/Data_Transfer

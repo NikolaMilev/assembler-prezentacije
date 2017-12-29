@@ -16,7 +16,6 @@ petlja:
 
 	mov rax, [rdi]
 	mov rbx, [rsi]
-	xor rdx, rdx
 	imul rbx
 	add rcx, rax
 

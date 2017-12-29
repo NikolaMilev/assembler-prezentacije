@@ -5,6 +5,10 @@
 # void izbaci_neparne(long a[], int *n) ;
 #                          rdi     rsi
 
+# uradjeno na drugi nacin, samo jednom prolazimo kroz niz
+# pamtimo adresu gde ubacujemo parni element u r8
+# ukoliko je element paran, prebacujemo ga na adresu r8 i pomeramo r8 za jedno mesto u desno
+# ukoliko je element neparan, samo smanjujemo duzinu niza
 izbaci_neparne:
 	enter 0,0
 	mov ecx, [rsi]
